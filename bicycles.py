@@ -39,6 +39,8 @@ class Bicycle(object):
 
   def __unicode__(self):
     return self.__str__()
+
+  
   
 
 
@@ -53,25 +55,25 @@ class Manufacturer(object):
     self.inventory[bicycle] = self.inventory.get(bicycle, 0) + 1
     
   def sell(self, bicycle, shop):
-    shop.buy(shop, bicycle, self)
+    shop.buy(bicycle, self)
     
 
-
-
-    
+ 
 class Bike_shop(object):
   def __init__(self, name):
     self.name = name
     self.inventory = {}
     self.profit = 0
     self.margin = 0.2
-  
+
   def buy(self, bicycle, manufacturer):
     self.inventory[bicycle] = 1
     manufacturer.inventory[bicycle] -= 1
-  
+
   def sell(self, bicycle, customer):
-    if customer.budget <= bicycle.cost * (1 + self.margin):
+    if self.inventory[bicycle] == 0:
+      print("sorry, we don't have that bike at the moment!")
+    elif customer.budget <= bicycle.cost * (1 + self.margin):
       print("sorry, you can't afford it!")
     else:
         self.profit += (self.margin * bicycle.cost)
@@ -100,18 +102,18 @@ class Customers(object):
     self.name = name
     self.budget = budget
     self.own = {}
-  
+
   def buy(self, bycicle, shop):
     shop.sell(bycicle, self)
-    
-    
+
+
 
 class Wheels(object):
   def __init__(self, model, weight, cost):
     self.model = model
     self.weight = weight
     self.cost = cost
-  
+
   def __str__(self):
     return '%s' % self.model
 
@@ -125,7 +127,4 @@ class Frames(object):
 
   def __str__(self):
     return '%s' % self.material
-
-
-    
 

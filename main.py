@@ -15,7 +15,6 @@ frame3 = Frames("steel",    15, 100)
 Manuf1 = Manufacturer("Manuf1")
 Manuf2 = Manufacturer("Manuf2")
 
-
 trek1 = Bicycle("trek1", "trek_2000", wheel3, frame1, "Manuf1")
 trek2 = Bicycle("trek2", "trek_2005", wheel1, frame2, "Manuf1")
 gary1 = Bicycle("gary1", "gary_90",   wheel2, frame3, "Manuf2")
@@ -30,6 +29,7 @@ Manuf1.produce(trek2)
 Manuf2.produce(gary1)
 Manuf2.produce(bike2)
 Manuf2.produce(bike1)
+Manuf2.produce(gary2)
 
 shop = Bike_shop("shop")
 
@@ -39,6 +39,9 @@ shop.buy(trek1, Manuf1)
 shop.buy(gary1, Manuf2)
 shop.buy(bike1, Manuf2)
 shop.buy(bike2, Manuf2)
+
+Manuf2.sell(gary2, shop)
+
 
 # Print the name of each customer, and a list of the bikes offered by the bike shop that they can afford given their budget.
 shop.offer(david)
@@ -54,9 +57,6 @@ print(shop.inventory)
 david.buy(trek1, shop)
 david.buy(trek2, shop)
 david.buy(trek1, shop)
-
-lara.buy(bike1, shop)
-vicky.buy(gary1, shop)
 
 # After each customer has purchased their bike, the script should print out the bicycle shop's remaining inventory for each bike,
 # and how much profit they have made selling the three bikes.
